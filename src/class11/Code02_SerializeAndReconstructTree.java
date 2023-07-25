@@ -4,6 +4,9 @@ import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
 
+/**
+ * 二叉树序列化和重建二叉树
+ */
 public class Code02_SerializeAndReconstructTree {
     /*
      * 二叉树可以通过先序、后序或者按层遍历的方式序列化和反序列化，
@@ -30,7 +33,11 @@ public class Code02_SerializeAndReconstructTree {
 			this.value = data;
 		}
 	}
-
+	/**
+	 * 按先序遍历方式序列化二叉树
+	 * @param  head 头结点
+	 * @return      Queue<String>
+	 */
 	public static Queue<String> preSerial(Node head) {
 		Queue<String> ans = new LinkedList<>();
 		pres(head, ans);
@@ -39,7 +46,7 @@ public class Code02_SerializeAndReconstructTree {
 
 	public static void pres(Node head, Queue<String> ans) {
 		if (head == null) {
-			ans.add(null);
+			ans.add(null); // 也可以是其他占位符ans.add("#");
 		} else {
 			ans.add(String.valueOf(head.value));
 			pres(head.left, ans);
@@ -79,6 +86,11 @@ public class Code02_SerializeAndReconstructTree {
 		}
 	}
 
+	/**
+	 * 按照先序遍历队列重建二叉树
+	 * @param  prelist 先序遍历队列
+	 * @return         Node 重建后二叉树头结点
+	 */
 	public static Node buildByPreQueue(Queue<String> prelist) {
 		if (prelist == null || prelist.size() == 0) {
 			return null;
@@ -120,20 +132,27 @@ public class Code02_SerializeAndReconstructTree {
 		return head;
 	}
 
+	/**
+	 * 按层方式序列化二叉树
+	 * @param  head 头结点
+	 * @return      Queue<String>
+	 */
 	public static Queue<String> levelSerial(Node head) {
+		// 序列化结果集队列
 		Queue<String> ans = new LinkedList<>();
 		if (head == null) {
 			ans.add(null);
 		} else {
 			ans.add(String.valueOf(head.value));
+			// 辅助队列，实现层序遍历
 			Queue<Node> queue = new LinkedList<Node>();
 			queue.add(head);
 			while (!queue.isEmpty()) {
 				head = queue.poll(); // head 父   子
-				if (head.left != null) {
+				if (head.left != null) { // 左孩子不为空，既放进结果集队列，又放进层序遍历队列
 					ans.add(String.valueOf(head.left.value));
 					queue.add(head.left);
-				} else {
+				} else { // 左孩子为空，只放进结果集
 					ans.add(null);
 				}
 				if (head.right != null) {

@@ -3,8 +3,13 @@ package class11;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * 层序遍历二叉树（使用队列）
+ */
 public class Code01_LevelTraversalBT {
-
+	/**
+	 * 树节点定义
+	 */
 	public static class Node {
 		public int value;
 		public Node left;
@@ -14,7 +19,10 @@ public class Code01_LevelTraversalBT {
 			value = v;
 		}
 	}
-
+	/**
+	 * 层序遍历二叉树
+	 * @param head 二叉树头节点
+	 */
 	public static void level(Node head) {
 		if (head == null) {
 			return;

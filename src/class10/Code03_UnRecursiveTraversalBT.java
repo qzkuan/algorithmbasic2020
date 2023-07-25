@@ -2,6 +2,9 @@ package class10;
 
 import java.util.Stack;
 
+/**
+ * 非递归方式遍历二叉树
+ */
 public class Code03_UnRecursiveTraversalBT {
 
 	public static class Node {
@@ -13,7 +16,10 @@ public class Code03_UnRecursiveTraversalBT {
 			value = v;
 		}
 	}
-
+	/**
+	 * 先序遍历 非递归方式 使用栈结构
+	 * @param head 头结点
+	 */
 	public static void pre(Node head) {
 		System.out.print("pre-order: ");
 		if (head != null) {
