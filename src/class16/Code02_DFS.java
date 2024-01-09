@@ -5,6 +5,11 @@ import java.util.Stack;
 
 public class Code02_DFS {
 
+	/**
+	 * 图的深度优先遍历
+	 * 使用栈和set辅助实现
+	 * @param node 出发图节点
+	 */
 	public static void dfs(Node node) {
 		if (node == null) {
 			return;

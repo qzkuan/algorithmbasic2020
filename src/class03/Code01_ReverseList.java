@@ -27,6 +27,11 @@ public class Code01_ReverseList {
 	//  head
 	//   a    ->   b    ->  c  ->  null
 	//   c    ->   b    ->  a  ->  null
+	/**
+	 * 反转链表（迭代法）
+	 * @param head 头结点
+	 * @return 反转后的链表
+	 */
 	public static Node reverseLinkedList(Node head) {
 		Node pre = null;
 		Node next = null;

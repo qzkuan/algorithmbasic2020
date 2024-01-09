@@ -3,6 +3,9 @@ package class17;
 import java.util.HashSet;
 import java.util.Stack;
 
+/**
+ * 经典递归和分治算法 汉诺塔问题
+ */
 public class Code02_Hanoi {
 
 	public static void hanoi1(int n) {
@@ -77,6 +80,18 @@ public class Code02_Hanoi {
 		}
 	}
 
+	/**
+	 * 经典递归和分治算法 汉诺塔问题
+	 * 通过将问题分解为子问题，并逐步递归解决子问题
+	 * 1.如果n==1，直接将圆盘从 from 移动到 to 
+	 * 2.否则，先将 n-1 个圆盘从 from 经由 to 移动到 other
+	 * 3.将第 n 个圆盘从 from 移动到 to
+	 * 4.最后，将 n-1 个圆盘从 other 经由 from 移动到 to
+	 * @param N 圆盘个数
+	 * @param from 初始柱子
+	 * @param to 目标柱子
+	 * @param other 辅助柱子
+	 */
 	public static void func(int N, String from, String to, String other) {
 		if (N == 1) { // base
 			System.out.println("Move 1 from " + from + " to " + to);

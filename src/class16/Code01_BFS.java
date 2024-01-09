@@ -6,7 +6,11 @@ import java.util.Queue;
 
 public class Code01_BFS {
 
-	// 从node出发，进行宽度优先遍历
+	/**
+	 * 图的广度优先遍历/宽度优先遍历
+	 * 使用队列和set辅助实现
+	 * @param start 出发图节点
+	 */
 	public static void bfs(Node start) {
 		if (start == null) {
 			return;

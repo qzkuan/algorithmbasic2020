@@ -38,12 +38,15 @@ public class Code01_Knapsack {
 		}
 		int N = w.length;
 		int[][] dp = new int[N + 1][bag + 1];
+		// 填写dp数组，当前行依赖于下一行的结果，所以第一个for循环倒着写
 		for (int index = N - 1; index >= 0; index--) {
 			for (int rest = 0; rest <= bag; rest++) {
+				// 1. 不选择当前货物，直接拿下个位置的结果
 				int p1 = dp[index + 1][rest];
 				int p2 = 0;
+				// 2. 选择当前货物，1）est - w[index] < 0说明无效，2）拿减去当前货物重量的下个位置的结果
 				int next = rest - w[index] < 0 ? -1 : dp[index + 1][rest - w[index]];
-				if (next != -1) {
+				if (next != -1) { // 只有当前位置有效才赋值
 					p2 = v[index] + next;
 				}
 				dp[index][rest] = Math.max(p1, p2);
