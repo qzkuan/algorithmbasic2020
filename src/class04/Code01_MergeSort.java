@@ -2,7 +2,10 @@ package class04;
 
 public class Code01_MergeSort {
 
-	// 递归方法实现
+	/**
+	 * ======归并排序一：递归方法实现======
+	 * @param arr
+	 */
 	public static void mergeSort1(int[] arr) {
 		if (arr == null || arr.length < 2) {
 			return;
@@ -24,12 +27,19 @@ public class Code01_MergeSort {
 		merge(arr, L, mid, R);
 	}
 
+	/**
+	 * 合并两个有序的数组arr[L,M]和arr[M+1,R]
+	 * @param arr 数组
+	 * @param L 左边界
+	 * @param M 中点
+	 * @param R 右边界
+	 */
 	public static void merge(int[] arr, int L, int M, int R) {
 		int[] help = new int[R - L + 1];
 		int i = 0;
-		int p1 = L;
-		int p2 = M + 1;
-		while (p1 <= M && p2 <= R) {
+		int p1 = L; // 左数组的第一个数
+		int p2 = M + 1; // 右数组的第一个数
+		while (p1 <= M && p2 <= R) { // p1和p2均未越界，谁小拷贝谁
 			help[i++] = arr[p1] <= arr[p2] ? arr[p1++] : arr[p2++];
 		}
 		// 要么p1越界了，要么p2越界了
@@ -40,11 +50,14 @@ public class Code01_MergeSort {
 			help[i++] = arr[p2++];
 		}
 		for (i = 0; i < help.length; i++) {
-			arr[L + i] = help[i];
+			arr[L + i] = help[i]; // 辅助数组内有序集合拷贝回原数组
 		}
 	}
 
-	// 非递归方法实现
+	/**
+	 * ======归并排序二：非递归方法实现======
+	 * @param arr
+	 */
 	public static void mergeSort2(int[] arr) {
 		if (arr == null || arr.length < 2) {
 			return;
@@ -61,6 +74,7 @@ public class Code01_MergeSort {
 				}
 				int M = L + mergeSize - 1;
 				int R = M + Math.min(mergeSize, N - M - 1);
+				// L...M, M+1...R
 				merge(arr, L, M, R);
 				L = R + 1;
 			}
@@ -68,7 +82,7 @@ public class Code01_MergeSort {
 			if (mergeSize > N / 2) {
 				break;
 			}
-			mergeSize <<= 1;
+			mergeSize <<= 1; // 步长 x 2
 		}
 	}
 

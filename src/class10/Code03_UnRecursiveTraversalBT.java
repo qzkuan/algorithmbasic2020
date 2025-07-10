@@ -17,20 +17,22 @@ public class Code03_UnRecursiveTraversalBT {
 		}
 	}
 	/**
-	 * 先序遍历 非递归方式 使用栈结构
+	 * ==先序==遍历 非递归方式 使用栈结构
 	 * @param head 头结点
 	 */
 	public static void pre(Node head) {
 		System.out.print("pre-order: ");
 		if (head != null) {
-			Stack<Node> stack = new Stack<Node>();
+			Stack<Node> stack = new Stack<Node>(); // 弹出顺序：头 左 右
 			stack.push(head);
 			while (!stack.isEmpty()) {
 				head = stack.pop();
 				System.out.print(head.value + " ");
+				// 先入栈右子树，后被弹出
 				if (head.right != null) {
 					stack.push(head.right);
 				}
+				// 后入栈左子树，先被弹出
 				if (head.left != null) {
 					stack.push(head.left);
 				}
@@ -39,15 +41,19 @@ public class Code03_UnRecursiveTraversalBT {
 		System.out.println();
 	}
 
+	/**
+	 * 非递归方式==中序==遍历二叉树（栈）
+	 * @param cur
+	 */
 	public static void in(Node cur) {
 		System.out.print("in-order: ");
 		if (cur != null) {
 			Stack<Node> stack = new Stack<Node>();
 			while (!stack.isEmpty() || cur != null) {
-				if (cur != null) {
+				if (cur != null) { // 依次先把最左元素入栈
 					stack.push(cur);
 					cur = cur.left;
-				} else {
+				} else { // 出栈打印，并把当前结点的右子树入栈
 					cur = stack.pop();
 					System.out.print(cur.value + " ");
 					cur = cur.right;
@@ -57,15 +63,19 @@ public class Code03_UnRecursiveTraversalBT {
 		System.out.println();
 	}
 
+	/**
+	 * 非递归方式==后序==遍历二叉树（双栈好理解，类似先序遍历）
+	 * @param head
+	 */
 	public static void pos1(Node head) {
 		System.out.print("pos-order: ");
 		if (head != null) {
-			Stack<Node> s1 = new Stack<Node>();
-			Stack<Node> s2 = new Stack<Node>();
+			Stack<Node> s1 = new Stack<Node>(); // s1弹出顺序：头 右 左
+			Stack<Node> s2 = new Stack<Node>(); // s2弹出顺序：左 右 头
 			s1.push(head);
 			while (!s1.isEmpty()) {
-				head = s1.pop(); // 头 右 左
-				s2.push(head);
+				head = s1.pop(); // s1弹出顺序：头 右 左
+				s2.push(head); // s1栈弹出元素后放进s2栈，最后依次弹出s2实现逆序
 				if (head.left != null) {
 					s1.push(head.left);
 				}
